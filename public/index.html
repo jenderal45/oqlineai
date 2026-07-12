@@ -1,224 +1,430 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Scorpio AI</title>
 
     <link rel="stylesheet" href="/style.css">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
 
 </head>
 
 <body>
 
-<header>
+<div class="app">
 
-    <div class="brand">
+    <!-- ========================= -->
+    <!-- SIDEBAR -->
+    <!-- ========================= -->
 
-        <div class="tail">
+    <aside class="sidebar">
 
-            <svg viewBox="0 0 100 100" fill="none">
+        <div class="sidebar-top">
 
-                <path
-                    d="M20 20
-                       Q15 45,35 50
-                       Q55 55,50 75
-                       Q47 88,60 90"
+            <button id="newChatBtn"
+                    class="new-chat">
 
-                    stroke="#F0A500"
-                    stroke-width="6"
-                    stroke-linecap="round"/>
+                <span>＋</span>
 
-                <circle
-                    cx="60"
-                    cy="90"
-                    r="6"
-                    fill="#C81E3A"/>
-
-            </svg>
-
-        </div>
-
-        <div class="brand-text">
-
-            <h1>
-                SCORPI<span>O</span> AI
-            </h1>
-
-            <p>
-                Tajam • Cepat • Mematikan Akurat
-            </p>
-
-            <p class="powered">
-                POWERED BY OQLINE
-            </p>
-
-        </div>
-
-    </div>
-
-    <div class="status">
-
-        <span class="dot"></span>
-
-        Aktif
-
-    </div>
-
-</header>
-
-<main id="chatArea">
-
-    <div
-        class="empty-state"
-        id="emptyState">
-
-        <div class="big-tail">
-
-            <svg
-                viewBox="0 0 100 100"
-                fill="none">
-
-                <path
-                    d="M20 20
-                       Q15 45,35 50
-                       Q55 55,50 75
-                       Q47 88,60 90"
-
-                    stroke="#F0A500"
-                    stroke-width="5"
-                    stroke-linecap="round"/>
-
-                <circle
-                    cx="60"
-                    cy="90"
-                    r="5"
-                    fill="#C81E3A"/>
-
-            </svg>
-
-        </div>
-
-        <h2>
-
-            Sengat pertanyaanmu di sini
-
-        </h2>
-
-        <p>
-
-            Scorpio AI siap membantu menulis,
-            menganalisis,
-            membuat ide,
-            coding,
-            bisnis,
-            maupun menjawab pertanyaanmu.
-
-        </p>
-
-        <div class="suggestions">
-
-            <button
-                class="suggestion-chip">
-
-                Jelaskan suatu topik
-
-            </button>
-
-            <button
-                class="suggestion-chip">
-
-                Bantu membuat artikel
-
-            </button>
-
-            <button
-                class="suggestion-chip">
-
-                Berikan ide bisnis
-
-            </button>
-
-            <button
-                class="suggestion-chip">
-
-                Buatkan kode program
+                <span>New Chat</span>
 
             </button>
 
         </div>
 
+        <div class="history-title">
+
+            Percakapan
+
+        </div>
+
+        <div id="historyList"
+             class="history-list">
+
+            <div class="history-item active">
+
+                Chat Baru
+
+            </div>
+
+        </div>
+
+        <div class="sidebar-bottom">
+
+            <div class="app-version">
+
+                Scorpio AI
+
+                <small>
+
+                    Version 2.0
+
+                </small>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+    <!-- ========================= -->
+    <!-- CONTENT -->
+    <!-- ========================= -->
+
+    <section class="content">
+
+        <!-- HEADER -->
+
+        <header class="topbar">
+
+            <div class="logo-area">
+
+                <div class="logo">
+
+                    🦂
+
+                </div>
+
+                <div class="logo-text">
+
+                    Scorpio AI
+
+                </div>
+
+            </div>
+
+            <div class="top-actions">
+
+                <select id="modelSelect">
+
+                    <optgroup label="FREE">
+
+                        <option value="google/gemma-3-27b-it:free">
+
+                            Gemma 3 27B
+
+                        </option>
+
+                        <option value="qwen/qwen3-235b-a22b:free">
+
+                            Qwen 3 235B
+
+                        </option>
+
+                        <option value="moonshotai/kimi-k2:free">
+
+                            Kimi K2
+
+                        </option>
+
+                    </optgroup>
+
+                    <optgroup label="PREMIUM">
+
+                        <option value="google/gemini-2.5-flash">
+
+                            Gemini 2.5 Flash
+
+                        </option>
+
+                        <option value="anthropic/claude-sonnet-4">
+
+                            Claude Sonnet 4
+
+                        </option>
+
+                        <option value="openai/gpt-4.1-mini">
+
+                            GPT-4.1 Mini
+
+                        </option>
+
+                        <option value="deepseek/deepseek-chat-v3-0324">
+
+                            DeepSeek V3
+
+                        </option>
+
+                    </optgroup>
+
+                </select>
+
+            </div>
+
+        </header>
+
+        <!-- CHAT -->
+
+        <main id="chatArea"
+              class="chat-area">
+
+            <div id="emptyState"
+                 class="welcome">
+
+                <div class="welcome-logo">
+
+                    🦂
+
+                </div>
+
+                <h1>
+
+                    Scorpio AI
+
+                </h1>
+
+                <p>
+
+                    Apa yang ingin Anda kerjakan hari ini?
+
+                </p>
+
+                <div class="quick-grid">
+
+                    <button class="suggestion-chip">
+
+                        ✍️ Tulis Artikel
+
+                    </button>
+
+                    <button class="suggestion-chip">
+
+                        💻 Buat Kode
+
+                    </button>
+
+                    <button class="suggestion-chip">
+
+                        📊 Analisis Data
+
+                    </button>
+
+                    <button class="suggestion-chip">
+
+                        🚀 Ide Bisnis
+
+                    </button>
+
+                    <button class="suggestion-chip">
+
+                        📑 Ringkas Dokumen
+
+                    </button>
+
+                    <button class="suggestion-chip">
+
+                        🎯 Strategi Marketing
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </main>
+
+                <!-- ========================= -->
+        <!-- FOOTER -->
+        <!-- ========================= -->
+
+        <footer class="chat-footer">
+
+            <div class="input-container">
+
+                <div class="input-toolbar">
+
+                    <button
+                        class="tool-btn"
+                        id="uploadBtn"
+                        title="Upload File">
+
+                        📎
+
+                    </button>
+
+                    <input
+                        type="file"
+                        id="fileInput"
+                        hidden>
+
+                    <button
+                        class="tool-btn"
+                        id="voiceBtn"
+                        title="Voice">
+
+                        🎤
+
+                    </button>
+
+                </div>
+
+                <textarea
+
+                    id="userInput"
+
+                    rows="1"
+
+                    placeholder="Ketik pesan untuk Scorpio AI...">
+
+                </textarea>
+
+                <button
+
+                    id="sendBtn"
+
+                    class="send-btn"
+
+                    title="Kirim">
+
+                    <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none">
+
+                        <path
+
+                            d="M5 12L19 12"
+
+                            stroke="currentColor"
+
+                            stroke-width="2"
+
+                            stroke-linecap="round"/>
+
+                        <path
+
+                            d="M13 6L19 12L13 18"
+
+                            stroke="currentColor"
+
+                            stroke-width="2"
+
+                            stroke-linecap="round"
+
+                            stroke-linejoin="round"/>
+
+                    </svg>
+
+                </button>
+
+            </div>
+
+            <div class="footer-note">
+
+                AI dapat menghasilkan informasi yang kurang tepat.
+                Selalu lakukan verifikasi untuk keputusan penting.
+
+            </div>
+
+        </footer>
+
+    </section>
+
+</div>
+
+<!-- ========================= -->
+<!-- MODAL SETTINGS -->
+<!-- ========================= -->
+
+<div
+    id="settingsModal"
+    class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>
+
+                Pengaturan
+
+            </h2>
+
+            <button
+                id="closeSettings">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <div class="setting-item">
+
+                <label>
+
+                    Tema
+
+                </label>
+
+                <select id="themeSelect">
+
+                    <option value="dark">
+
+                        Dark
+
+                    </option>
+
+                    <option value="light">
+
+                        Light
+
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="setting-item">
+
+                <label>
+
+                    Bahasa
+
+                </label>
+
+                <select id="languageSelect">
+
+                    <option value="id">
+
+                        Bahasa Indonesia
+
+                    </option>
+
+                    <option value="en">
+
+                        English
+
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
     </div>
 
-</main>
-
-<footer>
-
-    <div class="input-row">
-
-        <textarea
-
-            id="userInput"
-
-            rows="1"
-
-            placeholder="Tulis pesan untuk Scorpio AI...">
-
-        </textarea>
-
-        <button
-
-            id="sendBtn"
-
-            class="send-btn">
-
-            <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#0B0E11"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round">
-
-                <line
-                    x1="12"
-                    y1="19"
-                    x2="12"
-                    y2="5"/>
-
-                <polyline
-                    points="5 12 12 5 19 12"/>
-
-            </svg>
-
-        </button>
-
-    </div>
-
-    <div class="footnote">
-
-        Scorpio AI dapat membuat kesalahan.
-        Selalu periksa kembali informasi penting.
-
-        <span>
-
-            Powered by OQLine Technology
-
-        </span>
-
-    </div>
-
-</footer>
+</div>
 
 <script src="/app.js"></script>
 
-</body>
-</html>
+    
