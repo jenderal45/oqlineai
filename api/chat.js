@@ -18,7 +18,8 @@ export default async function handler(req, res) {
         }
 
         const {
-            messages = []
+            messages = [],
+            model
         } = req.body;
 
         if (!Array.isArray(messages)) {
@@ -42,23 +43,24 @@ export default async function handler(req, res) {
                         "http://localhost:3000",
 
                     "X-Title":
-                        "Scorpio AI"
+                        "Oqline AI"
                 },
 
                 body: JSON.stringify({
 
                     model:
+                        model ||
                         process.env.OPENROUTER_MODEL ||
-                        "deepseek/deepseek-chat-v3-0324:free",
+                        "google/gemma-3-27b-it:free",
 
                     messages: [
 
                         {
                             role: "system",
                             content:
-`Kamu adalah Scorpio AI.
+`Kamu adalah Oqline AI.
 
-Scorpio AI adalah AI resmi OQLine Technology.
+Oqline AI adalah asisten AI resmi Oqline Technology.
 
 Karakter:
 - Profesional
