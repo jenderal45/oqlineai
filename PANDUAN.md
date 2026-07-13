@@ -1,4 +1,4 @@
-# Scorpio AI — Versi Mandiri (Standalone)
+# Oqline AI — Versi Mandiri (Standalone)
 
 Versi ini bisa dijalankan sendiri (di komputer, server, atau hosting) tanpa
 tergantung pada Claude.ai. API key disimpan aman di server, tidak pernah
@@ -7,12 +7,12 @@ terlihat di browser/publik.
 ## Struktur folder
 
 ```
-scorpio-ai-server/
-├── server.js          ← backend (perantara ke API Anthropic)
+oqline-ai-server/
+├── server.js          ← backend (perantara ke API OpenRouter)
 ├── package.json
 ├── .env.example        ← contoh konfigurasi, salin jadi ".env"
 └── public/
-    └── index.html       ← tampilan Scorpio AI (frontend)
+    └── index.html       ← tampilan Oqline AI (frontend)
 ```
 
 ## Cara menjalankan (di komputer sendiri / VPS)
@@ -22,7 +22,7 @@ scorpio-ai-server/
 
 2. Masuk ke folder project:
    ```
-   cd scorpio-ai-server
+   cd oqline-ai-server
    ```
 
 3. Install dependency:
@@ -35,8 +35,8 @@ scorpio-ai-server/
    cp .env.example .env
    ```
 
-5. Buka file `.env`, isi `ANTHROPIC_API_KEY` dengan API key asli kamu.
-   Ambil API key dari: https://console.anthropic.com → menu "API Keys"
+5. Buka file `.env`, isi `OPENROUTER_API_KEY` dengan API key asli kamu.
+   Ambil API key dari: https://openrouter.ai → menu "Keys"
 
 6. Jalankan server:
    ```
@@ -44,20 +44,20 @@ scorpio-ai-server/
    ```
 
 7. Buka browser ke: **http://localhost:3000**
-   Scorpio AI sudah bisa dipakai dan terhubung ke API sungguhan.
+   Oqline AI sudah bisa dipakai dan terhubung ke API sungguhan.
 
 ## Cara pasang di hosting/domain Oqline
 
 Beberapa pilihan termudah untuk hosting backend Node.js:
 
 - **Railway** (railway.app) — upload folder ini, set environment variable
-  `ANTHROPIC_API_KEY`, otomatis jalan dan dapat URL publik.
+  `OPENROUTER_API_KEY`, otomatis jalan dan dapat URL publik.
 - **Render** (render.com) — sama, tinggal hubungkan repo GitHub.
 - **VPS sendiri** (misal jika Oqline punya server) — jalankan dengan `pm2`
   agar tetap aktif:
   ```
   npm install -g pm2
-  pm2 start server.js --name scorpio-ai
+  pm2 start server.js --name oqline-ai
   ```
 
 Setelah online, domain seperti `chat.oqline.id` bisa diarahkan (lewat reverse
