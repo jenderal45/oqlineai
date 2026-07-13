@@ -1,430 +1,163 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Scorpio AI</title>
-
-    <link rel="stylesheet" href="/style.css">
-
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-          rel="stylesheet">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#d71920">
+  <meta name="description" content="Oqline AI — asisten cerdas untuk menulis, menganalisis, dan menciptakan ide.">
+  <title>Oqline AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
 </head>
-
 <body>
-
-<div class="app">
-
-    <!-- ========================= -->
-    <!-- SIDEBAR -->
-    <!-- ========================= -->
-
-    <aside class="sidebar">
-
-        <div class="sidebar-top">
-
-            <button id="newChatBtn"
-                    class="new-chat">
-
-                <span>＋</span>
-
-                <span>New Chat</span>
-
-            </button>
-
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">OQ</div>
+        <div>
+          <div class="brand-name">Oqline <span>AI</span></div>
+          <div class="brand-tagline">Think faster. Create better.</div>
         </div>
+      </div>
 
-        <div class="history-title">
+      <button id="newChatBtn" class="new-chat-btn" type="button">
+        <span class="plus-icon">+</span>
+        <span>Percakapan Baru</span>
+      </button>
 
-            Percakapan
+      <div class="sidebar-section-title">Riwayat</div>
+      <nav id="historyList" class="history-list" aria-label="Riwayat percakapan">
+        <button class="history-item active" type="button">
+          <span class="history-icon">◇</span>
+          <span class="history-label">Chat Baru</span>
+          <span class="history-more">•••</span>
+        </button>
+      </nav>
 
+      <div class="sidebar-footer">
+        <div class="status-card">
+          <span class="status-dot"></span>
+          <div>
+            <strong>Sistem aktif</strong>
+            <small>Oqline AI v2.1</small>
+          </div>
         </div>
-
-        <div id="historyList"
-             class="history-list">
-
-            <div class="history-item active">
-
-                Chat Baru
-
-            </div>
-
-        </div>
-
-        <div class="sidebar-bottom">
-
-            <div class="app-version">
-
-                Scorpio AI
-
-                <small>
-
-                    Version 2.0
-
-                </small>
-
-            </div>
-
-        </div>
-
+        <div class="copyright">© 2026 Oqline Technology</div>
+      </div>
     </aside>
 
-    <!-- ========================= -->
-    <!-- CONTENT -->
-    <!-- ========================= -->
-
-    <section class="content">
-
-        <!-- HEADER -->
-
-        <header class="topbar">
-
-            <div class="logo-area">
-
-                <div class="logo">
-
-                    🦂
-
-                </div>
-
-                <div class="logo-text">
-
-                    Scorpio AI
-
-                </div>
-
-            </div>
-
-            <div class="top-actions">
-
-                <select id="modelSelect">
-
-                    <optgroup label="FREE">
-
-                        <option value="google/gemma-3-27b-it:free">
-
-                            Gemma 3 27B
-
-                        </option>
-
-                        <option value="qwen/qwen3-235b-a22b:free">
-
-                            Qwen 3 235B
-
-                        </option>
-
-                        <option value="moonshotai/kimi-k2:free">
-
-                            Kimi K2
-
-                        </option>
-
-                    </optgroup>
-
-                    <optgroup label="PREMIUM">
-
-                        <option value="google/gemini-2.5-flash">
-
-                            Gemini 2.5 Flash
-
-                        </option>
-
-                        <option value="anthropic/claude-sonnet-4">
-
-                            Claude Sonnet 4
-
-                        </option>
-
-                        <option value="openai/gpt-4.1-mini">
-
-                            GPT-4.1 Mini
-
-                        </option>
-
-                        <option value="deepseek/deepseek-chat-v3-0324">
-
-                            DeepSeek V3
-
-                        </option>
-
-                    </optgroup>
-
-                </select>
-
-            </div>
-
-        </header>
-
-        <!-- CHAT -->
-
-        <main id="chatArea"
-              class="chat-area">
-
-            <div id="emptyState"
-                 class="welcome">
-
-                <div class="welcome-logo">
-
-                    🦂
-
-                </div>
-
-                <h1>
-
-                    Scorpio AI
-
-                </h1>
-
-                <p>
-
-                    Apa yang ingin Anda kerjakan hari ini?
-
-                </p>
-
-                <div class="quick-grid">
-
-                    <button class="suggestion-chip">
-
-                        ✍️ Tulis Artikel
-
-                    </button>
-
-                    <button class="suggestion-chip">
-
-                        💻 Buat Kode
-
-                    </button>
-
-                    <button class="suggestion-chip">
-
-                        📊 Analisis Data
-
-                    </button>
-
-                    <button class="suggestion-chip">
-
-                        🚀 Ide Bisnis
-
-                    </button>
-
-                    <button class="suggestion-chip">
-
-                        📑 Ringkas Dokumen
-
-                    </button>
-
-                    <button class="suggestion-chip">
-
-                        🎯 Strategi Marketing
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </main>
-
-                <!-- ========================= -->
-        <!-- FOOTER -->
-        <!-- ========================= -->
-
-        <footer class="chat-footer">
-
-            <div class="input-container">
-
-                <div class="input-toolbar">
-
-                    <button
-                        class="tool-btn"
-                        id="uploadBtn"
-                        title="Upload File">
-
-                        📎
-
-                    </button>
-
-                    <input
-                        type="file"
-                        id="fileInput"
-                        hidden>
-
-                    <button
-                        class="tool-btn"
-                        id="voiceBtn"
-                        title="Voice">
-
-                        🎤
-
-                    </button>
-
-                </div>
-
-                <textarea
-
-                    id="userInput"
-
-                    rows="1"
-
-                    placeholder="Ketik pesan untuk Scorpio AI...">
-
-                </textarea>
-
-                <button
-
-                    id="sendBtn"
-
-                    class="send-btn"
-
-                    title="Kirim">
-
-                    <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none">
-
-                        <path
-
-                            d="M5 12L19 12"
-
-                            stroke="currentColor"
-
-                            stroke-width="2"
-
-                            stroke-linecap="round"/>
-
-                        <path
-
-                            d="M13 6L19 12L13 18"
-
-                            stroke="currentColor"
-
-                            stroke-width="2"
-
-                            stroke-linecap="round"
-
-                            stroke-linejoin="round"/>
-
-                    </svg>
-
-                </button>
-
-            </div>
-
-            <div class="footer-note">
-
-                AI dapat menghasilkan informasi yang kurang tepat.
-                Selalu lakukan verifikasi untuk keputusan penting.
-
-            </div>
-
-        </footer>
-
-    </section>
-
-</div>
-
-<!-- ========================= -->
-<!-- MODAL SETTINGS -->
-<!-- ========================= -->
-
-<div
-    id="settingsModal"
-    class="modal">
-
-    <div class="modal-content">
-
-        <div class="modal-header">
-
-            <h2>
-
-                Pengaturan
-
-            </h2>
-
-            <button
-                id="closeSettings">
-
-                ✕
-
+    <section class="main-panel">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="menuBtn" class="icon-btn menu-btn" type="button" aria-label="Buka menu">
+            <span></span><span></span><span></span>
+          </button>
+          <div>
+            <div class="page-title">Oqline AI</div>
+            <div class="page-subtitle">Asisten cerdas untuk produktivitas Anda</div>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <label class="model-picker" for="modelSelect">
+            <span class="model-indicator"></span>
+            <select id="modelSelect" aria-label="Pilih model AI">
+              <optgroup label="FREE">
+                <option value="google/gemma-3-27b-it:free">Gemma 3 27B</option>
+                <option value="qwen/qwen3-235b-a22b:free">Qwen 3 235B</option>
+                <option value="moonshotai/kimi-k2:free">Kimi K2</option>
+              </optgroup>
+              <optgroup label="PREMIUM">
+                <option value="google/gemini-2.5-flash">Gemini 2.5 Flash</option>
+                <option value="anthropic/claude-sonnet-4">Claude Sonnet 4</option>
+                <option value="openai/gpt-4.1-mini">GPT-4.1 Mini</option>
+                <option value="deepseek/deepseek-chat-v3-0324">DeepSeek V3</option>
+              </optgroup>
+            </select>
+          </label>
+          <button id="settingsBtn" class="icon-btn" type="button" aria-label="Pengaturan">⚙</button>
+        </div>
+      </header>
+
+      <main id="chatArea" class="chat-area">
+        <section id="emptyState" class="welcome-state">
+          <div class="hero-badge">OQ</div>
+          <div class="eyebrow">SELAMAT DATANG DI OQLINE AI</div>
+          <h1>Apa yang ingin Anda<br><span>selesaikan hari ini?</span></h1>
+          <p>Mulai percakapan, gali ide, buat konten, atau analisis informasi dengan bantuan AI.</p>
+
+          <div class="suggestion-grid">
+            <button class="suggestion-card" data-prompt="Bantu saya menulis artikel profesional tentang " type="button">
+              <span class="suggestion-icon">✦</span>
+              <span><strong>Tulis Artikel</strong><small>Buat tulisan yang terstruktur</small></span>
+              <span class="arrow">→</span>
             </button>
+            <button class="suggestion-card" data-prompt="Bantu saya membuat kode untuk " type="button">
+              <span class="suggestion-icon">&lt;/&gt;</span>
+              <span><strong>Buat Kode</strong><small>Bangun dan perbaiki program</small></span>
+              <span class="arrow">→</span>
+            </button>
+            <button class="suggestion-card" data-prompt="Bantu saya menganalisis data berikut: " type="button">
+              <span class="suggestion-icon">▥</span>
+              <span><strong>Analisis Data</strong><small>Temukan pola dan insight</small></span>
+              <span class="arrow">→</span>
+            </button>
+            <button class="suggestion-card" data-prompt="Berikan saya ide bisnis untuk " type="button">
+              <span class="suggestion-icon">↗</span>
+              <span><strong>Ide Bisnis</strong><small>Kembangkan peluang baru</small></span>
+              <span class="arrow">→</span>
+            </button>
+            <button class="suggestion-card" data-prompt="Ringkas dokumen berikut dengan jelas: " type="button">
+              <span class="suggestion-icon">▤</span>
+              <span><strong>Ringkas Dokumen</strong><small>Ambil inti informasi</small></span>
+              <span class="arrow">→</span>
+            </button>
+            <button class="suggestion-card" data-prompt="Buatkan strategi pemasaran untuk " type="button">
+              <span class="suggestion-icon">◎</span>
+              <span><strong>Strategi Marketing</strong><small>Rancang langkah yang efektif</small></span>
+              <span class="arrow">→</span>
+            </button>
+          </div>
+        </section>
+      </main>
 
+      <footer class="chat-footer">
+        <div class="composer-wrap">
+          <div id="fileBadge" class="file-badge" hidden></div>
+          <div class="composer">
+            <button class="composer-btn" id="uploadBtn" type="button" title="Lampirkan file" aria-label="Lampirkan file">＋</button>
+            <input type="file" id="fileInput" hidden>
+            <textarea id="userInput" rows="1" placeholder="Tulis pesan Anda di sini..." aria-label="Pesan"></textarea>
+            <button class="composer-btn voice-btn" id="voiceBtn" type="button" title="Input suara" aria-label="Input suara">⌁</button>
+            <button id="sendBtn" class="send-btn" type="button" title="Kirim" aria-label="Kirim pesan">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
         </div>
+        <div class="footer-note">Oqline AI dapat membuat kesalahan. Verifikasi informasi penting sebelum digunakan.</div>
+      </footer>
+    </section>
+  </div>
 
-        <div class="modal-body">
-
-            <div class="setting-item">
-
-                <label>
-
-                    Tema
-
-                </label>
-
-                <select id="themeSelect">
-
-                    <option value="dark">
-
-                        Dark
-
-                    </option>
-
-                    <option value="light">
-
-                        Light
-
-                    </option>
-
-                </select>
-
-            </div>
-
-            <div class="setting-item">
-
-                <label>
-
-                    Bahasa
-
-                </label>
-
-                <select id="languageSelect">
-
-                    <option value="id">
-
-                        Bahasa Indonesia
-
-                    </option>
-
-                    <option value="en">
-
-                        English
-
-                    </option>
-
-                </select>
-
-            </div>
-
-        </div>
-
+  <div id="overlay" class="overlay"></div>
+  <div id="settingsModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div><div class="eyebrow">PREFERENSI</div><h2 id="settingsTitle">Pengaturan</h2></div>
+        <button id="closeSettings" class="icon-btn" type="button" aria-label="Tutup">×</button>
+      </div>
+      <div class="setting-item">
+        <label for="languageSelect">Bahasa antarmuka</label>
+        <select id="languageSelect"><option value="id">Bahasa Indonesia</option><option value="en">English</option></select>
+      </div>
+      <div class="about-box"><strong>Oqline AI</strong><p>Antarmuka putih–merah yang bersih, modern, dan responsif.</p></div>
     </div>
+  </div>
 
-</div>
-
-<script src="/app.js"></script>
-
-    
+  <script src="/app.js"></script>
+</body>
+</html>
