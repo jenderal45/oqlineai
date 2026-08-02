@@ -18,13 +18,13 @@
 
   --border-light: #e5e5e5;
   --border-input: #d9d9e3;
-  --border-input-focus: #10a37f;
+  --border-input-focus: #d71920;
   --border-sidebar: #4d4d4f;
 
-  --accent: #10a37f;
-  --accent-hover: #0d8c6d;
-  --accent-soft: #e6f5f0;
-  --accent-faint: #f0faf7;
+  --accent: #d71920;
+  --accent-hover: #b70f16;
+  --accent-soft: #fff0f1;
+  --accent-faint: #fff8f8;
 
   --shadow-sm: 0 0 15px rgba(0,0,0,.06);
   --shadow-md: 0 2px 12px rgba(0,0,0,.08);
@@ -57,20 +57,21 @@ button { cursor: pointer; }
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   padding: 4px 4px 16px;
 }
 
 .brand-mark {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
   display: grid;
   place-items: center;
   background: var(--accent);
   color: white;
   font-weight: 700;
-  font-size: 13px;
+  font-size: 14px;
+  flex-shrink: 0;
 }
 
 .brand-name {
@@ -195,7 +196,7 @@ button { cursor: pointer; }
   height: 8px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 0 3px rgba(16,163,127,.15);
+  box-shadow: 0 0 0 3px rgba(215,25,32,.15);
 }
 
 .status-card strong,
@@ -344,17 +345,17 @@ button { cursor: pointer; }
 }
 
 .hero-badge {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  font-size: 20px;
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  font-size: 22px;
   display: grid;
   place-items: center;
   background: var(--accent);
   color: white;
   font-weight: 700;
   margin-bottom: 20px;
-  box-shadow: none;
+  box-shadow: 0 8px 24px rgba(215,25,32,.18);
 }
 
 .eyebrow {
@@ -486,7 +487,7 @@ button { cursor: pointer; }
 }
 
 .msg.user .avatar {
-  background: #10a37f;
+  background: #171719;
   color: white;
 }
 
@@ -571,7 +572,7 @@ button { cursor: pointer; }
 
 .composer:focus-within {
   border-color: var(--border-input-focus);
-  box-shadow: 0 0 0 2px rgba(16,163,127,.15), var(--shadow-sm);
+  box-shadow: 0 0 0 2px rgba(215,25,32,.12), var(--shadow-sm);
 }
 
 .composer textarea {
