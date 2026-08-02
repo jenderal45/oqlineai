@@ -28,8 +28,41 @@ button { cursor: pointer; }
 .brand-name span { color: var(--red); }
 .brand-tagline { color: var(--muted); font-size: 10px; margin-top: 3px; }
 
-.new-chat-btn { border: 0; border-radius: 13px; min-height: 48px; display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--red); color: white; font-weight: 700; box-shadow: 0 9px 22px rgba(215,25,32,.18); transition: .2s ease; }
-.new-chat-btn:hover { background: var(--red-dark); transform: translateY(-1px); }
+.new-chat-btn{
+    width:calc(100% - 32px);
+    margin:16px;
+    border:0;
+    border-radius:14px;
+    min-height:52px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+
+    background:var(--red);
+    color:#fff;
+
+    font-size:15px;
+    font-weight:700;
+
+    cursor:pointer;
+    box-shadow:0 10px 24px rgba(215,25,32,.18);
+
+    transition:.25s ease;
+}
+
+.new-chat-btn:hover{
+    background:var(--red-dark);
+    transform:translateY(-2px);
+    box-shadow:0 14px 28px rgba(215,25,32,.25);
+}
+
+.new-chat-btn .plus-icon{
+    font-size:22px;
+    line-height:1;
+    font-weight:600;
+}
 .plus-icon { font-size: 21px; font-weight: 400; }
 .sidebar-section-title { margin: 27px 8px 10px; color: #a1a1aa; font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
 .history-list { flex: 1; overflow-y: auto; }
