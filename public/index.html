@@ -1111,7 +1111,7 @@ button { cursor: pointer; }
   </div>
 
   <script>
-    // ===== PARSE MARKDOWN: convert **text** ke <strong> =====
+    // ===== PARSE MARKDOWN =====
     function parseMarkdown(text) {
       if (!text) return "";
       let html = text
@@ -1124,10 +1124,8 @@ button { cursor: pointer; }
         .replace(/^## (.+)$/gm, "<h2>$1</h2>")
         .replace(/^# (.+)$/gm, "<h1>$1</h1>")
         .replace(/^[-*] (.+)$/gm, "<li>$1</li>");
-      // Wrap consecutive <li> in <ul>
       html = html.replace(/(<li>.*?<\/li>\n?)+/g, function(match) { return "<ul>" + match + "</ul>"; });
       html = html.replace(/<\/ul>\n?<ul>/g, "");
-      // Paragraphs
       html = html.split("\n\n").map(function(p) { return p.trim() ? "<p>" + p + "</p>" : ""; }).join("\n");
       html = html.replace(/<p>(<h[1-6]>.*?<\/h[1-6]>)<\/p>/g, "$1");
       html = html.replace(/<p>(<pre>.*?<\/pre>)<\/p>/g, "$1");
@@ -1135,18 +1133,108 @@ button { cursor: pointer; }
       return html;
     }
 
+    // ===== SEND MESSAGE =====
+    const chatArea = document.getElementById("chatArea");
+    const emptyState = document.getElementById("emptyState");
+    const userInput = document.getElementById("userInput");
+    const sendBtn = document.getElementById("sendBtn");
+    let isTyping = false;
+
+    function addMessage(text, isUser) {
+      // Hide welcome state on first message
+      if (emptyState && emptyState.parentNode) {
+        emptyState.remove();
+      }
+
+      const msgDiv = document.createElement("div");
+      msgDiv.className = "msg " + (isUser ? "user" : "ai");
+
+      const avatar = document.createElement("div");
+      avatar.className = "avatar";
+      avatar.textContent = isUser ? "U" : "AI";
+
+      const bubble = document.createElement("div");
+      bubble.className = "bubble";
+      if (isUser) {
+        bubble.textContent = text;
+      } else {
+        bubble.innerHTML = parseMarkdown(text);
+      }
+
+      msgDiv.appendChild(avatar);
+      msgDiv.appendChild(bubble);
+      chatArea.appendChild(msgDiv);
+      chatArea.scrollTop = chatArea.scrollHeight;
+      return msgDiv;
+    }
+
+    function showThinking() {
+      const msgDiv = document.createElement("div");
+      msgDiv.className = "msg ai";
+      msgDiv.id = "thinkingMsg";
+
+      const avatar = document.createElement("div");
+      avatar.className = "avatar";
+      avatar.textContent = "AI";
+
+      const bubble = document.createElement("div");
+      bubble.className = "bubble";
+      bubble.innerHTML = '<div class="thinking"><span></span><span></span><span></span></div>';
+
+      const badge = document.createElement("div");
+      badge.className = "model-badge";
+      badge.textContent = document.getElementById("modelSelect").selectedOptions[0].text;
+
+      bubble.insertBefore(badge, bubble.firstChild);
+      msgDiv.appendChild(avatar);
+      msgDiv.appendChild(bubble);
+      chatArea.appendChild(msgDiv);
+      chatArea.scrollTop = chatArea.scrollHeight;
+    }
+
+    function removeThinking() {
+      const t = document.getElementById("thinkingMsg");
+      if (t) t.remove();
+    }
+
+    async function handleSend() {
+      const text = userInput.value.trim();
+      if (!text || isTyping) return;
+
+      // Add user message
+      addMessage(text, true);
+      userInput.value = "";
+      userInput.style.height = "auto";
+
+      // Show AI thinking
+      isTyping = true;
+      sendBtn.disabled = true;
+      showThinking();
+
+      // Simulate AI response (replace with your actual API call)
+      setTimeout(function() {
+        removeThinking();
+        // Example response with markdown
+        addMessage("Terima kasih atas pertanyaannya! Saya siap membantu Anda dengan **berbagai hal**, mulai dari:\n\n- Menulis artikel\n- Membuat kode\n- Analisis data\n- Dan banyak lagi!\n\nAda yang bisa saya bantu?", false);
+        isTyping = false;
+        sendBtn.disabled = false;
+      }, 1500);
+    }
+
+    // Send button click
+    sendBtn.addEventListener("click", handleSend);
+
     // Auto-resize textarea
-    const textarea = document.getElementById("userInput");
-    textarea.addEventListener("input", function() {
+    userInput.addEventListener("input", function() {
       this.style.height = "auto";
       this.style.height = Math.min(this.scrollHeight, 200) + "px";
     });
 
-    // Send on Enter (Shift+Enter for new line)
-    textarea.addEventListener("keydown", function(e) {
+    // Enter to send, Shift+Enter for new line
+    userInput.addEventListener("keydown", function(e) {
       if (e.key === "Enter" && !e.shiftKey) {
         e.preventDefault();
-        document.getElementById("sendBtn").click();
+        handleSend();
       }
     });
 
@@ -1179,9 +1267,9 @@ button { cursor: pointer; }
     document.querySelectorAll(".suggestion-card").forEach(function(card) {
       card.addEventListener("click", function() {
         const prompt = card.dataset.prompt || "";
-        textarea.value = prompt;
-        textarea.focus();
-        textarea.dispatchEvent(new Event("input"));
+        userInput.value = prompt;
+        userInput.focus();
+        userInput.dispatchEvent(new Event("input"));
       });
     });
 
