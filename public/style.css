@@ -41,7 +41,7 @@ button { cursor: pointer; }
 
 .app-shell { display: flex; width: 100vw; height: 100vh; }
 
-/* ===== SIDEBAR (Dark, minimal like ChatGPT) ===== */
+/* ===== SIDEBAR ===== */
 .sidebar {
   width: 260px;
   flex: 0 0 260px;
@@ -54,6 +54,7 @@ button { cursor: pointer; }
   transition: transform .25s ease;
 }
 
+/* Brand / Logo area */
 .brand {
   display: flex;
   align-items: center;
@@ -61,21 +62,31 @@ button { cursor: pointer; }
   padding: 4px 4px 16px;
 }
 
+.brand img,
+.brand-logo-img {
+  max-width: 140px;
+  max-height: 40px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
 .brand-mark {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
   display: grid;
   place-items: center;
   background: var(--accent);
   color: white;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13px;
   flex-shrink: 0;
 }
 
 .brand-name {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--text-sidebar);
   letter-spacing: -0.3px;
@@ -197,6 +208,7 @@ button { cursor: pointer; }
   border-radius: 50%;
   background: var(--accent);
   box-shadow: 0 0 0 3px rgba(215,25,32,.15);
+  flex-shrink: 0;
 }
 
 .status-card strong,
@@ -231,9 +243,10 @@ button { cursor: pointer; }
   display: flex;
   flex-direction: column;
   background: var(--bg-chat);
+  position: relative;
 }
 
-/* ===== TOPBAR (Minimal, clean) ===== */
+/* ===== TOPBAR ===== */
 .topbar {
   height: 60px;
   flex: 0 0 60px;
@@ -308,6 +321,7 @@ button { cursor: pointer; }
   height: 6px;
   border-radius: 50%;
   background: var(--accent);
+  flex-shrink: 0;
 }
 
 .model-picker select {
@@ -328,6 +342,7 @@ button { cursor: pointer; }
   overflow-y: auto;
   padding: 0;
   scroll-behavior: smooth;
+  position: relative;
 }
 
 /* ===== WELCOME STATE ===== */
@@ -340,22 +355,35 @@ button { cursor: pointer; }
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 40px 20px;
+  padding: 40px 24px;
   animation: rise .4s ease;
+  position: relative;
+  z-index: 2;
+}
+
+/* Logo besar di welcome state — batasi supaya tidak berantakan */
+.welcome-state img,
+.welcome-logo {
+  max-width: 160px;
+  max-height: 50px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 16px;
 }
 
 .hero-badge {
-  width: 64px;
-  height: 64px;
-  border-radius: 16px;
-  font-size: 22px;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  font-size: 18px;
   display: grid;
   place-items: center;
   background: var(--accent);
   color: white;
   font-weight: 700;
-  margin-bottom: 20px;
-  box-shadow: 0 8px 24px rgba(215,25,32,.18);
+  margin-bottom: 16px;
+  flex-shrink: 0;
 }
 
 .eyebrow {
@@ -364,13 +392,14 @@ button { cursor: pointer; }
   font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
+  margin-bottom: 8px;
 }
 
 .welcome-state h1 {
-  margin-top: 12px;
-  font-size: clamp(28px, 3.5vw, 40px);
-  line-height: 1.2;
-  letter-spacing: -1px;
+  margin-top: 0;
+  font-size: clamp(26px, 3vw, 36px);
+  line-height: 1.25;
+  letter-spacing: -0.5px;
   font-weight: 600;
   color: var(--text-primary);
 }
@@ -381,7 +410,7 @@ button { cursor: pointer; }
 
 .welcome-state > p {
   max-width: 520px;
-  margin-top: 14px;
+  margin-top: 12px;
   color: var(--text-secondary);
   font-size: 14px;
   line-height: 1.6;
@@ -392,12 +421,12 @@ button { cursor: pointer; }
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
-  margin-top: 32px;
+  margin-top: 28px;
   max-width: 600px;
 }
 
 .suggestion-card {
-  min-height: 72px;
+  min-height: 68px;
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
@@ -443,6 +472,7 @@ button { cursor: pointer; }
   color: var(--text-secondary);
   font-size: 14px;
   transition: .15s;
+  flex-shrink: 0;
 }
 
 .suggestion-card:hover .arrow {
@@ -479,6 +509,7 @@ button { cursor: pointer; }
   border-radius: 4px;
   font-size: 10px;
   font-weight: 700;
+  flex-shrink: 0;
 }
 
 .msg.ai .avatar {
@@ -572,7 +603,7 @@ button { cursor: pointer; }
 
 .composer:focus-within {
   border-color: var(--border-input-focus);
-  box-shadow: 0 0 0 2px rgba(215,25,32,.12), var(--shadow-sm);
+  box-shadow: 0 0 0 2px rgba(215,25,32,.1), var(--shadow-sm);
 }
 
 .composer textarea {
@@ -604,6 +635,7 @@ button { cursor: pointer; }
   color: var(--text-secondary);
   font-size: 18px;
   transition: .15s;
+  flex-shrink: 0;
 }
 
 .composer-btn:hover {
@@ -628,11 +660,11 @@ button { cursor: pointer; }
   box-shadow: none;
   transition: .15s;
   font-size: 16px;
+  flex-shrink: 0;
 }
 
 .send-btn:hover {
   background: var(--accent-hover);
-  transform: none;
 }
 
 .send-btn:disabled {
@@ -827,18 +859,28 @@ button { cursor: pointer; }
     padding-top: 24px;
   }
   .welcome-state h1 {
-    font-size: 28px;
-    letter-spacing: -0.5px;
+    font-size: 26px;
   }
   .welcome-state > p {
     font-size: 13px;
+  }
+  .welcome-state img,
+  .welcome-logo {
+    max-width: 120px;
+    max-height: 40px;
+  }
+  .hero-badge {
+    width: 44px;
+    height: 44px;
+    font-size: 16px;
   }
   .suggestion-grid {
     margin-top: 20px;
     gap: 8px;
   }
   .suggestion-card {
-    min-height: 64px;
+    min-height: 60px;
+    padding: 10px 12px;
   }
   .chat-footer {
     padding: 10px 14px 14px;
