@@ -22,7 +22,8 @@ button { cursor: pointer; }
 .sidebar { width: 280px; flex: 0 0 280px; display: flex; flex-direction: column; padding: 24px 18px 18px; background: var(--white); border-right: 1px solid var(--line); z-index: 30; transition: transform .25s ease; }
 .brand { display: flex; align-items: center; gap: 12px; padding: 0 6px 24px; }
 .brand-mark, .hero-badge { display: grid; place-items: center; background: var(--red); color: white; font-weight: 800; letter-spacing: -.8px; box-shadow: 0 10px 26px rgba(215,25,32,.22); }
-.brand-mark { width: 43px; height: 43px; border-radius: 13px; font-size: 15px; }
+.brand-mark{ width:60px; height:60px; background:transparent; border-radius:0; box-shadow:none; display:flex; align-items:center; justify-content:center; }
+.brand-mark img{ width:54px; height:54px; object-fit:contain; }
 .brand-name { font-size: 19px; font-weight: 800; letter-spacing: -.5px; }
 .brand-name span { color: var(--red); }
 .brand-tagline { color: var(--muted); font-size: 10px; margin-top: 3px; }
@@ -50,7 +51,8 @@ button { cursor: pointer; }
 
 .chat-area { flex: 1; min-height: 0; overflow-y: auto; padding: 36px 28px; scroll-behavior: smooth; }
 .welcome-state { min-height: 100%; max-width: 850px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px 0; animation: rise .45s ease; }
-.hero-badge { width: 72px; height: 72px; border-radius: 22px; font-size: 22px; transform: rotate(-4deg); margin-bottom: 22px; }.hero-badge::after { content: ""; position: absolute; }
+.hero-badge{ width:160px; height:160px; background:transparent; border-radius:0; box-shadow:none; display:flex; align-items:center; justify-content:center; margin:0 auto 24px; }
+.hero-badge img{ width:140px; height:140px; object-fit:contain; }
 .eyebrow { color: var(--red); font-size: 10px; font-weight: 800; letter-spacing: 1.6px; }
 .welcome-state h1 { margin-top: 10px; font-size: clamp(32px, 4vw, 49px); line-height: 1.08; letter-spacing: -2px; }.welcome-state h1 span { color: var(--red); }.welcome-state > p { max-width: 620px; margin-top: 17px; color: var(--muted); font-size: 14px; line-height: 1.7; }
 .suggestion-grid { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 34px; }
