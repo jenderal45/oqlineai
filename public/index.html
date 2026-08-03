@@ -314,34 +314,7 @@ button { cursor: pointer; }
   margin: 1.5px 0;
 }
 
-.model-picker {
-  min-width: 160px;
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-  border: 1px solid var(--border-light);
-  border-radius: 8px;
-  background: var(--bg-chat);
-}
 
-.model-indicator {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-  flex-shrink: 0;
-}
-
-.model-picker select {
-  width: 100%;
-  border: 0;
-  outline: 0;
-  background: transparent;
-  color: var(--text-primary);
-  padding: 8px 6px;
-  font-size: 12px;
-  font-weight: 500;
-}
 
 /* ===== CHAT AREA ===== */
 .chat-area {
@@ -612,14 +585,7 @@ button { cursor: pointer; }
   box-shadow: none;
 }
 
-.model-badge {
-  margin-bottom: 6px;
-  color: var(--text-secondary);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
+
 
 .thinking {
   display: flex;
@@ -906,12 +872,7 @@ button { cursor: pointer; }
   .top-actions {
     gap: 6px;
   }
-  .model-picker {
-    min-width: 110px;
-  }
-  .model-picker select {
-    font-size: 11px;
-  }
+
   .top-actions > .icon-btn {
     display: none;
   }
@@ -964,6 +925,7 @@ button { cursor: pointer; }
   }
 }
   </style>
+<base target="_blank">
 <base target="_blank">
 </head>
 <body>
@@ -1018,17 +980,7 @@ button { cursor: pointer; }
         </div>
 
         <div class="top-actions">
-          <label class="model-picker" for="modelSelect">
-            <span class="model-indicator"></span>
-            <select id="modelSelect" aria-label="Pilih model AI">
-              <!--<optgroup label="Free">
-                <option value="google/gemini-2.5-flash">Gemini 2.5 Flash</option>
-                <option value="anthropic/claude-sonnet-4">Claude Sonnet 4</option>
-                <option value="openai/gpt-4.1-mini">GPT-4.1 Mini</option>
-                <option value="deepseek/deepseek-chat-v3-0324">DeepSeek V3</option>
-              </optgroup>-->
-            </select>
-          </label>
+          
           <button id="settingsBtn" class="icon-btn" type="button" aria-label="Pengaturan">&#9881;</button>
         </div>
       </header>
@@ -1137,7 +1089,6 @@ button { cursor: pointer; }
   const emptyState = document.getElementById("emptyState");
   const input = document.getElementById("userInput");
   const sendBtn = document.getElementById("sendBtn");
-  const modelSelect = document.getElementById("modelSelect");
   const newChatBtn = document.getElementById("newChatBtn");
   const settingsBtn = document.getElementById("settingsBtn");
   const closeSettings = document.getElementById("closeSettings");
@@ -1160,19 +1111,9 @@ button { cursor: pointer; }
     content: "Kamu adalah Oqline AI, asisten cerdas yang ramah, profesional, dan adaptif. Jawablah dengan variasi gaya sesuai konteks — bisa formal, santai, atau kreatif. Gunakan format markdown (bold, list, code block) saat relevan. Selalu berikan jawaban yang informatif dan bermanfaat."
   };
 
-  const MODELS = {
-    "google/gemma-3-27b-it:free": "Gemma 3 27B",
-    "qwen/qwen3-235b-a22b:free": "Qwen 3 235B",
-    "moonshotai/kimi-k2:free": "Kimi K2",
-    "google/gemini-2.5-flash": "Gemini 2.5 Flash",
-    "anthropic/claude-sonnet-4": "Claude Sonnet 4",
-    "openai/gpt-4.1-mini": "GPT-4.1 Mini",
-    "deepseek/deepseek-chat-v3-0324": "DeepSeek V3"
-  };
 
-  const savedModel = localStorage.getItem("oqline_model");
-  if (savedModel && MODELS[savedModel]) modelSelect.value = savedModel;
-  modelSelect.addEventListener("change", () => localStorage.setItem("oqline_model", modelSelect.value));
+
+
 
   input.addEventListener("input", () => {
     input.style.height = "auto";
@@ -1186,7 +1127,7 @@ button { cursor: pointer; }
     }
   });
 
-  function appendMessage(role, text, model = "") {
+  function appendMessage(role, text) {
     document.getElementById("emptyState")?.remove();
     const message = document.createElement("div");
     message.className = `msg ${role}`;
@@ -1197,12 +1138,6 @@ button { cursor: pointer; }
 
     const bubble = document.createElement("div");
     bubble.className = "bubble";
-    if (role === "ai" && model) {
-      const badge = document.createElement("div");
-      badge.className = "model-badge";
-      badge.textContent = model;
-      bubble.appendChild(badge);
-    }
     const content = document.createElement("div");
     if (role === "ai") {
       content.innerHTML = parseMarkdown(text);
@@ -1219,7 +1154,7 @@ button { cursor: pointer; }
     const message = document.createElement("div");
     message.className = "msg ai";
     message.id = "thinking";
-    message.innerHTML = `<div class="avatar">OQ</div><div class="bubble"><div class="model-badge">${MODELS[modelSelect.value] || "Oqline AI"}</div><div class="thinking"><span></span><span></span><span></span></div></div>`;
+    message.innerHTML = `<div class="avatar">OQ</div><div class="bubble"><div class="thinking"><span></span><span></span><span></span></div></div>`;
     chatArea.appendChild(message);
     chatArea.scrollTop = chatArea.scrollHeight;
   }
@@ -1239,7 +1174,7 @@ button { cursor: pointer; }
     if (!text || isLoading) return;
     if (selectedFile) text += `\n\n[Lampiran dipilih: ${selectedFile.name}]`;
 
-    const selectedModel = modelSelect.value;
+
     appendMessage("user", text);
     history.push({ role: "user", content: text });
     input.value = "";
@@ -1256,7 +1191,7 @@ button { cursor: pointer; }
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ model: selectedModel, messages: messages })
+        body: JSON.stringify({ messages: messages })
       });
 
       // If API not available, use demo mode
@@ -1265,7 +1200,7 @@ button { cursor: pointer; }
         document.getElementById("thinking")?.remove();
         const demoReply = DEMO_RESPONSES[demoIndex % DEMO_RESPONSES.length];
         demoIndex++;
-        appendMessage("ai", demoReply, MODELS[selectedModel] || selectedModel);
+        appendMessage("ai", demoReply);
         history.push({ role: "assistant", content: demoReply });
         return;
       }
@@ -1273,7 +1208,7 @@ button { cursor: pointer; }
       const data = await response.json();
       document.getElementById("thinking")?.remove();
       if (!response.ok) throw new Error(data.error || "Permintaan gagal.");
-      appendMessage("ai", data.reply, MODELS[selectedModel] || selectedModel);
+      appendMessage("ai", data.reply);
       history.push({ role: "assistant", content: data.reply });
     } catch (error) {
       document.getElementById("thinking")?.remove();
